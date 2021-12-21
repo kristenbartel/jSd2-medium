@@ -10,22 +10,33 @@ const leetText = {
     T : 7
 }
 
-             function convertor (string) {
+//need new string 
+//need old string
+//if x is true then add the new char to new string
+//need to run over the string 
+//the only way to anything in to scope is through a parameter.
+//the only way to get anything out is through return
 
-                 return string.split('').map(i => leetText[i] || i) .join('');
+             function leetSpeak (aString) {
+                let leetString = aString;
+                for (i = 0; i < aString.length; i++) {
+                        leetString = leetString.replace('A', leetText.A);
+                        leetString = leetString.replace('E', leetText.E);
+                        leetString = leetString.replace('I', leetText.I);
+                        leetString = leetString.replace('G', leetText.G);
+                        leetString = leetString.replace('O', leetText.O);
              }
-             
-     console.log(convertor("EAGLE"));
+             return leetString;
+            }
+             console.log(leetSpeak('AEIGO'));
 
-    //  other attempts
 
-             // function leetSpeak (aString) {
-        //     for (aString.includes("A")) {
-        //         console.log(aString.replace('A', leetText.A));
-        //      }
-        //      for (aString.includes("E")) {
-        //         console.log(aString.replace('E', leetText.E));
-        //      }
-            
-        //      }
+
+// other attempts
+//         function convertor (string) {
+//                  return string.split('').map(i => leetText[i] || i).join('');
+//              }
+//             console.log(convertor("EAGLE"));
+
+     
 
