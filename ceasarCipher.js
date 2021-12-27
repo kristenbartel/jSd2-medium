@@ -1,59 +1,43 @@
 // Write a function cipher which is given a string, an offset, and returns the Caesar cipher of the string.
-// cipher('Genius without education is like silver in the mine')
-// 'Travhf jvgubhg rqhpngvba vf yvxr fvyire va gur zvar'
-
-// The action of a Caesar cipher is to replace each plaintext letter with a different one a fixed number of places down the alphabet. The cipher illustrated here uses a left shift of three, so that (for example) each occurrence of E in the plaintext becomes B in the ciphertext.
-
-
-//need a oldString to input
-//need to encode the oldString to a newString using cipher
-    //create a cipher based of the alphabet
-        //need the plain alphabet 
-        // need a function that shifts the alpha -1 number indices
-        // and also needs to be a fluid loop so that when 'a' is called it goes to index location 25/'z'
-//need a loop over a oldString that will evaluate each index value "letter" and 
-//then determine what to replace it with
-
-//step 1: figure out to input string of a and return string of b
-
-//function that takes a string and makes it an array
-//return the new array
-
-//function that 
-
-
-let alpha = ["a", "b", "c", "d", "e", "f", "g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-
-// function splitter (string) {
-//     newArr = string.split('');
-//     return newArr;
-// }
-//     console.log(splitter("hello"));
-    
-
-function cipher(string, alphaArr) {
-    let newArr = [];
-        for (i = 0; i < string.length; i++) {
-        newArr.push(alphaArr.indexOf(string[i])-1);
-        //need to return value of index in alphaArr according to newArr index numbers
-        //need to join values
-        
-        
+let alpha = ["a", "b", "c", "d", "e", "f", "g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z", " "];    
+function getRotatedIndexOfString (string, alphaArr) {
+    let tempArr = [];
+    for (i = 0; i < string.length; i++) {
+        if (string[i] === ' ') {
+            tempArr.push(26);
+            // continue; control flow keyword-- controls the flow of  a for loop
         }
-        
-        // newArr = alphaArr.valueOf(newArr);
-        // alphaArr.indexOf(newArr);
-        // let newArr = alphaArr.indexOf(newArr);
-        // newArr = newArr.valueOf(alphaArr[i]);
-         
-        return newArr;
+        if (string[i] === 'a') {
+            tempArr.push(25);
+            // continue; control flow keyword-- controls the flow of  a for loop
+        } if (string[i] != 'a' && string[i] != ' ') {
+            tempArr.push(alphaArr.indexOf(string[i])-1)
+        }
+    }
+        return tempArr; //=> [6, 3, 10, 10, 13]
 }
-console.log(cipher('hello', alpha));
 
-// let newArr2 = alpha.map(cipher('hello', alpha));
-// console.log(alpha.indexOf())
-// function printArrElements(arr,) {
-//     console.log(arr[arr1[i]]);
-// }
-// printArrElements(alpha, cipher());
+function getCharValuesOfIndex (alphaArr, rotatedIndexes) {
+    let rotatedCharsArr = [];
+    for (i = 0; i < rotatedIndexes.length; i++) {
+        //first get the char value
+        let rotatedIndex = rotatedIndexes[i];
+        let rotatedChar = alphaArr[rotatedIndex];
+        //then push the char value
+        rotatedCharsArr.push(rotatedChar);
+    }
+    return rotatedCharsArr;
+}
+// console.log(getCharValuesOfIndex(alpha, [6, 3, 10, 10, 13]))
+function assembleString (string, alphaArr) {
+    let assembledString = '';
+    let rotatedIndicesOfString = getRotatedIndexOfString(string, alphaArr);
+    let charValuesOfIndex = getCharValuesOfIndex(alphaArr, rotatedIndicesOfString); //this uses the previous as a parameter-- getting the getting the rotatedIndexOfString into the getCharValuesOfIndex function
+    for (i = 0; i < charValuesOfIndex.length; i++) {
+        assembledString = assembledString + charValuesOfIndex[i];
+    }
+    return assembledString;
+}
+console.log(assembleString('hello ', alpha));
+
 
